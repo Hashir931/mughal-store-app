@@ -41,6 +41,36 @@ async function fetchHomeData() {
   return { products, categories, spotlight };
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mughal-store-app-production.up.railway.app";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Mughal Store",
+      url: siteUrl,
+      logo: `${siteUrl}/desktophero.jpeg`,
+      description: "Luxury heritage jewelry, attars and handcrafted royal accessories in Pakistan.",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Mughal Store",
+      publisher: {
+        "@id": `${siteUrl}/#organization`,
+      },
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${siteUrl}/shop?search={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+  ],
+};
+
 export default async function HomePage() {
   const { products, categories, spotlight } = await fetchHomeData();
   const featured = products;
@@ -48,6 +78,10 @@ export default async function HomePage() {
 
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* ── Hero ── */}
      <HeroSection />
       {/* ── Shop by category ── */}

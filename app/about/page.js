@@ -1,6 +1,16 @@
 export const metadata = {
-  title: "About Us | Mughal Store",
-  description: "Mughal Store. Where Style Meets Elegance. Discover our brand vision, quality commitment, and heritage-inspired fashion.",
+  title: "About Us",
+  description:
+    "Learn about Mughal Store — Where Style Meets Elegance. Discover our vision, premium craftsmanship, and heritage-inspired jewelry & attars.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Us | Mughal Store",
+    description:
+      "Learn about Mughal Store — Where Style Meets Elegance. Discover our heritage-inspired collections.",
+    url: "/about",
+  },
 };
 
 export default function AboutPage() {

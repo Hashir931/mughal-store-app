@@ -1,4 +1,10 @@
-export const metadata = { title: "Privacy Policy" };
+export const metadata = {
+  title: "Privacy Policy",
+  description: "Read the Privacy Policy of Mughal Store. Learn how we protect and handle your personal data.",
+  alternates: {
+    canonical: "/privacy",
+  },
+};
 
 export default function PrivacyPage() {
   return (

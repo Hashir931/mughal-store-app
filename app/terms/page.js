@@ -1,4 +1,10 @@
-export const metadata = { title: "Terms & Conditions" };
+export const metadata = {
+  title: "Terms & Conditions",
+  description: "Read the Terms and Conditions for shopping with Mughal Store.",
+  alternates: {
+    canonical: "/terms",
+  },
+};
 
 export default function TermsPage() {
   return (

@@ -4,7 +4,15 @@ import EmptyState from "@/components/EmptyState";
 
 export const metadata = {
   title: "Categories",
-  description: "Browse product categories at Mughal Store.",
+  description: "Browse curated luxury jewelry, royal attars, and premium accessory collections at Mughal Store.",
+  alternates: {
+    canonical: "/shop/categories",
+  },
+  openGraph: {
+    title: "Product Categories | Mughal Store",
+    description: "Explore curated collections of royal jewelry and fragrances at Mughal Store.",
+    url: "/shop/categories",
+  },
 };
 
 export const dynamic = "force-dynamic";

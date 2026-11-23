@@ -191,8 +191,45 @@ export default function ProductDetailPage() {
     }
   };
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://mughal-store-app-production.up.railway.app";
+  const primaryImage = images[0] ? getImageUrl(images[0]) : `${siteUrl}/desktophero.jpeg`;
+  const fullImageUrl = primaryImage.startsWith("http") ? primaryImage : `${siteUrl}${primaryImage}`;
+
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description || `Buy ${product.name} at Mughal Store`,
+    image: fullImageUrl,
+    brand: {
+      "@type": "Brand",
+      name: "Mughal Store",
+    },
+    offers: {
+      "@type": "Offer",
+      url: `${siteUrl}/shop/products/${encodeURIComponent(slug)}`,
+      priceCurrency: "PKR",
+      price: product.discountPrice || product.price,
+      availability: outOfStock
+        ? "https://schema.org/OutOfStock"
+        : "https://schema.org/InStock",
+      itemCondition: "https://schema.org/NewCondition",
+    },
+    ...(product.numReviews > 0 && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: product.rating || 5,
+        reviewCount: product.numReviews,
+      },
+    }),
+  };
+
   return (
     <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 md:pt-7.5 md:py-9 bg-[var(--color-surface-base)] min-h-screen text-[var(--color-content-main)] overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       
       {/* Navigation Breadcrumb */}
       <nav className="mb-4 sm:mb-6 flex items-center gap-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-wider text-[var(--color-content-muted)] overflow-x-auto whitespace-nowrap pb-1">
